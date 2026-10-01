@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "rooms": {
+      "$code": {
+        ".read": "auth != null",
+        "meta": {
+          ".write": "auth != null && ((!data.exists() && newData.child('hostId').val() === auth.uid) || (data.child('hostId').val() === auth.uid))"
+        },
+        "players": {
+          "$uid": {
+            ".write": "auth != null && $uid === auth.uid"
+          }
+        },
+        "state": {
+          ".write": "auth != null && data.parent().child('meta/hostId').val() === auth.uid"
+        },
+        "actions": {
+          ".write": "auth != null",
+          "$actionId": {
+            ".validate": "newData.hasChildren(['type','playerId','__uid']) && newData.child('__uid').val() === auth.uid"
+          }
+        },
+        "events": {
+          ".write": "auth != null && data.parent().child('meta/hostId').val() === auth.uid"
+        },
+        "chat": {
+          ".write": "auth != null",
+          "$msgId": {
+            ".validate": "newData.child('text').val().length <= 140 && newData.child('uid').val() === auth.uid"
+          }
+        },
+        "ping": {
+          "$uid": {
+            ".write": "auth != null && $uid === auth.uid"
+          }
+        }
+      }
+    }
+  }
+}
