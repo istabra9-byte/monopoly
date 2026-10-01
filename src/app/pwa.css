@@ -1,0 +1,23 @@
+/* PWA + app chrome helpers */
+html {
+  background: #f4efe6;
+}
+html.dark {
+  background: #12131c;
+}
+
+/* high contrast mode */
+.ec-contrast {
+  --ec-ink: #1a1830;
+  --ec-ink-soft: #3f3c58;
+  --border: #8a86a0;
+}
+.ec-contrast .ec-btn-ghost,
+.ec-contrast .ec-btn-sheet {
+  border-width: 2px;
+}
+
+/* safe-area helper for the game footer on notched phones */
+.ec-root > footer {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+}
